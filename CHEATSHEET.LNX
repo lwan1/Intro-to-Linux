@@ -1,0 +1,125 @@
+First Commands
+man - accesses the system manuals
+   Ex: $man[COMMAND]
+exit - terminates the current process
+   Ex: $exit
+
+Interacting with Command Line
+man - used to display the user manual of any command that we can run on the terminal
+  $man[-f | -w][COMMAND NAME]
+pwd - Print Working Directory
+   $pwd[-L | -P]
+ls - lists directory contents of files and directories
+   $ls[-t | -1 | -l | -h | -a]
+
+Directory Notation
+~ = Linux 'shortcut' to denote a user's home directory
+. = denotes the current directory
+.. = denotes the 'parent' directory
+ 
+ 
+mkdir - allows the user to make directories
+   $mkdir[-v | -p][DIRECTORY]
+rmdir - used to remove empty directories from the filesystem
+   $rmdir[-p | -v]{DIRECTORY]
+cd - used to Change current working Directory
+   $cd[DIRECTORY]
+mv - used to move one or more files or directories
+   $mv[-i | -f | -n | -b][SOURCE][DESTINATION]
+cp - used to copy files or group of files or directory
+   $cp[-R | -i][SOURCE][DESTINATION]
+less - used to read contents of text file 1 page (1 screen) per time
+   $less[FILENAME]
+apropos - helps the user when they don't remember the exact command
+   $apropos[KEYWORD]
+
+Aliases
+Instructs the shell to replace 1 command with another while executing the command
+Syntax: $ alias name= 'value'
+Tip: to print all of the defined aliases in a reusable format
+   $alias -p
+To remove an existing alias: $unalias[COMMAND NAME]
+
+Interrogating Files
+touch - used to create, change, and modify timestamps of a file; used to create a file without any content
+   $touch[OPTIONS][FILE(s)]
+rm - (stands for remove) used to remove objects such as files, directories, symbolic links and so on
+   $rm[-i | -r | -f][FILE]
+find - used to find files or directories and perform subsequent operations on them
+   $find[where to start searching from][EXPRESSION to find][OPTIONS][what to find]
+   Expression examples: -name, -empty, -type, -size, -perm, -user
+file - used to determine the type of file based 3 sets of test: filesystem, magic, and language test
+   $file[-b][FILENAME]
+stat - provides info about a file such as size, inode number, access permissions, time of last access or modificcation, and more
+   $stat[OPTIONS][FILE]
+df - displayes the amount of disk space available on the file system
+   $df[OPTIONS][FILENAME]
+wc - (aka word count) used for counting purposes; finds out the number of lines, word count, bytes, and character count in files specified
+   $wc[-l | -w | -c | -m][FILENAME]
+
+File Sharing
+wget is a non-interactive network downloader
+   $wget[-o | -a][FILE TO SAVE TO][URL]
+tar stands for tape archive, used to create Archive and extract that Archive file
+   $tar[-xvf | -cvf | -xvzf | -cvzf][archive-FILE][file are directory to be archived]
+Create compressed file: $tar cvf[list of FILES]
+Uncompress file: $tar xvf FILE.tar
+
+I/O Manipulation
+echo - used to display line of text that is passes as an argument
+   $echo[-e | -n][TEXT]
+cat - (concatenate) reads data from file and gives content as output; helps create, view, and concatenate files
+   $cat[-n]...[FILE]...
+
+3 Data Streams
+stdin (Symbol: 0<) = standard input stream; keyboard by default
+stdout (Symbol: 1>) = standard output stream; terminal by default
+stderr (Symbol: 2>) = standard output for error messages; terminal by default
+
+Redirection
+command > file = output of command will be written to file instead of terminal
+command >> file = append output in an existing file
+command < file = input can be redirected from a file in this manner
+command 2> fileError = can filter out the error messages from a command result and save them to a file
+command 2>> fileError = can filter out the error messages from a command and append them to an existing file
+
+Linux Waste Bin
+/dev/null is a point of no return
+   $find / -name bin 2> /dev/null
+   to find all 'bin' files in the home directory recursively, but avoid printing errors for any 'bin' files that do not allow access
+
+Variables
+Environment variables are those that define system properties and allow programs to function correctly
+Local variables are only present in the current instance or session of the shell
+Setting a variable: var_name = 'value'
+to print value of variable: echo $var_name
+export - marks an environment variable to be exported with any new program/script and allows a program/script to inherit all marked variables
+   $export[-n | -p][name[=value]...]
+
+Quoting
+Double Quotes: use when you want to enclose variables or use shell expansion inside a string
+   $ - get variable content
+   `` (backquotes) - get the output of a shell command
+Single Quotes: all characters within single quotes are interpreted as purely string characters
+
+Globbing and Wildcards
+* - matches one or more occurrences of any character, including no character
+? - represents or matches a single occurrence of any character
+[] - matches any occurrence of characters enclosed in the square brackets
+{} - terms are separated by commas and each term must be the name of something or a wildcard
+
+Exit Status
+0: successful execution of command
+1: command fails because of an error during expansion/redirection
+2: incorrect command usage
+126: command found but not executable
+127: command not found
+
+Command Line Arguments
+$0: the filename of the current script
+$n: these variables correspond to the arguments with which a script was invoked; here 'n' is a positive decimal number corresponding to position of argument
+$#: number of arguments supplied to script
+$*: all arguments are double quotes
+$@: all arguments are individually double quoted
+$$: process number of current shell
+$!: process number of last background command

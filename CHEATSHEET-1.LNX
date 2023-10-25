@@ -1,0 +1,370 @@
+First Commands
+man - accesses the system manuals
+   $man[COMMAND]
+exit - terminates the current process
+   $exit
+
+Interacting with Command Line
+man - used to display the user manual of any command that we can run on the terminal
+   $man[-f | -w][COMMAND NAME]
+pwd - Print Working Directory
+   $pwd[-L | -P]
+ls - lists directory contents of files and directories
+   $ls[-t | -1 | -l | -h | -a]
+
+Directory Notation
+~ = Linux 'shortcut' to denote a user's home directory
+. = denotes the current directory
+.. = denotes the 'parent' directory
+ 
+mkdir - allows the user to make directories
+   $mkdir[-v | -p][DIRECTORY]
+rmdir - used to remove empty directories from the filesystem
+   $rmdir[-p | -v]{DIRECTORY]
+cd - used to Change current working Directory
+   $cd[DIRECTORY]
+mv - used to move one or more files or directories
+   $mv[-i | -f | -n | -b][SOURCE][DESTINATION]
+cp - used to copy files or group of files or directory
+   $cp[-R | -i][SOURCE][DESTINATION]
+less - used to read contents of text file 1 page (1 screen) per time
+   $less[FILENAME]
+apropos - helps the user when they don't remember the exact command
+   $apropos[KEYWORD]
+
+Aliases
+Instructs the shell to replace 1 command with another while executing the command
+Syntax: $ alias name= 'value'
+Tip: to print all of the defined aliases in a reusable format
+   $alias -p
+To remove an existing alias: $unalias[COMMAND NAME]
+
+Interrogating Files
+touch - used to create, change, and modify timestamps of a file; used to create a file without any content
+   $touch[OPTIONS][FILE(s)]
+rm - (stands for remove) used to remove objects such as files, directories, symbolic links and so on
+   $rm[-i | -r | -f][FILE]
+find - used to find files or directories and perform subsequent operations on them
+   $find[where to start searching from][EXPRESSION to find][OPTIONS][what to find]
+   Expression examples: -name, -empty, -type, -size, -perm, -user
+file - used to determine the type of file based 3 sets of test: filesystem, magic, and language test
+   $file[-b][FILENAME]
+stat - provides info about a file such as size, inode number, access permissions, time of last access or modificcation, and more
+   $stat[OPTIONS][FILE]
+df - displayes the amount of disk space available on the file system
+   $df[OPTIONS][FILENAME]
+wc - (aka word count) used for counting purposes; finds out the number of lines, word count, bytes, and character count in files specified
+   $wc[-l | -w | -c | -m][FILENAME]
+
+File Sharing
+wget is a non-interactive network downloader
+   $wget[-o | -a][FILE TO SAVE TO][URL]
+tar stands for tape archive, used to create Archive and extract that Archive file
+   $tar[-xvf | -cvf | -xvzf | -cvzf][archive-FILE][file are directory to be archived]
+Create compressed file: $tar cvf[list of FILES]
+Uncompress file: $tar xvf FILE.tar
+
+I/O Manipulation
+echo - used to display line of text that is passes as an argument
+   $echo[-e | -n][TEXT]
+cat - (concatenate) reads data from file and gives content as output; helps create, view, and concatenate files
+   $cat[-n]...[FILE]...
+
+3 Data Streams
+stdin (Symbol: 0<) = standard input stream; keyboard by default
+stdout (Symbol: 1>) = standard output stream; terminal by default
+stderr (Symbol: 2>) = standard output for error messages; terminal by default
+
+Redirection
+command > file = output of command will be written to file instead of terminal
+command >> file = append output in an existing file
+command < file = input can be redirected from a file in this manner
+command 2> fileError = can filter out the error messages from a command result and save them to a file
+command 2>> fileError = can filter out the error messages from a command and append them to an existing file
+
+Linux Waste Bin
+/dev/null is a point of no return
+   $find / -name bin 2> /dev/null
+   to find all 'bin' files in the home directory recursively, but avoid printing errors for any 'bin' files that do not allow access
+
+Variables
+Environment variables are those that define system properties and allow programs to function correctly
+Local variables are only present in the current instance or session of the shell
+Setting a variable: var_name = 'value'
+to print value of variable: echo $var_name
+export - marks an environment variable to be exported with any new program/script and allows a program/script to inherit all marked variables
+   $export[-n | -p][name[=value]...]
+
+Quoting
+Double Quotes: use when you want to enclose variables or use shell expansion inside a string
+   $ - get variable content
+   `` (backquotes) - get the output of a shell command
+Single Quotes: all characters within single quotes are interpreted as purely string characters
+
+Globbing and Wildcards
+* - matches one or more occurrences of any character, including no character
+? - represents or matches a single occurrence of any character
+[] - matches any occurrence of characters enclosed in the square brackets
+{} - terms are separated by commas and each term must be the name of something or a wildcard
+
+Exit Status
+0: successful execution of command
+1: command fails because of an error during expansion/redirection
+2: incorrect command usage
+126: command found but not executable
+127: command not found
+
+Common Passed Parameter Variables
+$0: the filename of the current script
+$n: these variables correspond to the arguments with which a script was invoked; here 'n' is a positive decimal number corresponding to position of argument
+$#: number of arguments supplied to script
+$*: all arguments are double quotes
+$@: all arguments are individually double quoted
+$$: process number of current shell
+$!: process number of last background command
+
+5 Conditional Statements in bash programming
+if-fi
+if-else-fi
+if-elif-else-fi
+if-then-else-if-then-fi-fi
+switch statement
+
+Ex: if [ expression ]
+    then
+       statement
+    fi
+
+Ex: if [ expression ]
+    then
+       statement1
+    else
+       statement2
+    fi
+
+Ex: if [ expression1 ]
+    then
+       statement1
+       statement2
+       *
+    elif [ expression2 ]
+    then
+       statement3
+       statement4
+       *
+    else
+       statement5
+    fi
+
+Ex: if [ expression1 ]
+    then
+       statement1
+       statement2
+       *
+    else
+       if [ expression2 ]
+       then
+          statement3
+          *
+       fi
+    fi
+
+Ex: case __ in
+       Pattern 1) statement1 ;;
+       Pattern 2) statement2 ;;
+       Pattern n) statementn ;;
+
+Boolean Operations
+&& = and
+|| = or
+
+4 Looping Statements in bash programming
+while statement
+for statement
+select statement
+until statement
+
+Ex: while command
+    do
+       statement to be executed
+    done
+
+Ex: for var in word1 word2... wordn
+    do
+       statement to be executed
+    done
+
+Ex: until [ condition ]
+    do
+       [ commands ] 
+    done
+
+Ex: select var in <list>
+    do
+       [ commands ]
+    done
+
+Variable Increment & Decrement
+To increase a variable, the following syntax must be used:
+   x=$(($x + 1)) for direct variable reassignment
+   OR
+   $(( x++ )) from within a command
+
+Process Control
+Running a script with
+   $ ./script.sh
+starts a foreground process & we can't use the shell until it is over.
+Running
+   $ ./script.sh &
+starts a backgrounds process, but stdout is still used. The terminal can be used, but it competes for stdout. 
+Running
+   $ ./script.sh > script.log &
+redirects output to a file & uses a background process, so the shell can be used normally.
+In general, appending an ampersand (&) to the command runs the job in the background.
+
+top - displays processor activity of Linux box & displays tasks managed by the kernel in real-time
+ps - by default, produces a list of all process associated w/ the current user & terminal session
+pgrep [ -u username ] [ process name pattern] - way of getting the PID of a process
+kill [ -s signal ] [ pid ] - to attempt to kill a process
+pkill - works similarily as kill, but operates on a process name instead
+
+User Input
+read [ variable name ] - asks for the user's input & exits once the user provides some input, storing the input into the variable specified
+
+Piping in Unix/Linux
+A pipe is a form of redirection, used to send the output of one command/program/process to another command/program/process for further processing.
+This is done by using the pipe character '|'.
+
+Ex: command1 | command2 | command3 | ... | commandn
+
+Common Pipeline Utilities: grep
+grep - searches the named input file or stdin (e.g., pipeline or redirected input) for lines containing a match to the given pattern
+   $ grep [ -i | -c | -l | -n ] [ regex pattern ] [ filename ]
+
+Regular Expression Examples
+abc: exact string "abc" anywhere in text
+^abc: "abc" at beginning of string
+abc$: "abc" at end of string
+[abc]: single match of a, b, or c
+[A-Z]*: zero or more sequential captial letters
+AB*Z: A followed by zero or more B followed by Z
+[[:blank:]]: spadces or tabs
+
+Common Pipeline Utilities: head & tail
+head - print the top N lines of data of the given input
+   $ head [ -N ] [ filename ]
+tail - print the last N lines of data of the given input
+   $ tail [ -N ] [ filename ]
+
+Common Pipeline Utilities: sort
+sort - sorts a file by line (assumes ASCII)
+   $ sort [ -o | -r | -c | -u ] [ filename ]
+
+Common Pipeline Utilities: tee
+tee - reads stdin & writes to both stdout & one or more files
+   $ tee [ filename to save to ]
+   Ex: $ cat file.txt | tee output.txt
+
+Common Pipeline Utilities: uniq
+uniq - reports or filters out the repeated lines in a file; can be used to report the # of repeated lines, content of them, or unique lines (note: content must be sorted before using uniq)
+   $ uniq [ -c | -d | -u ] [ filename ]
+
+Common Pipeline Utilities: tr
+tr - used for translating or deleting characters
+   $ tr [ -d ] [ character pattern ] [ pattern for replacement ]
+   Ex: echo "new lines" | tr "[:blank:]" "\n"
+       cat lowercase.txt | tr "[a-z]" "[A-Z]" > uppercase.txt
+       echo "no spaces" | tr -d "[:blank:]"
+
+Permissions: Read, Write, Execute
+With files:
+   r - you may view the contents of the file
+   w - you may change the contents of the file
+   x - you may execute or run the file
+With directories:
+   r - you have the ability to read the contents of the directory 
+   (i.e., do an ls)
+   w - you have the ability to write into the directory
+   (i.e., create files & directories)
+   x - you have the ability to enter that directory 
+   (i.e., cd)
+
+Permissions: Users
+3 sets of people for whom we may specify permissions
+   owner - a single person who owns the file
+   group - every file belongs to a single group of people
+   others - everyone else who is not in the group or the owner
+
+Ex: -rwxr-xr--
+1. First character identifies file type (if a dash [-], then it is a normal file; if a 'd', then it is a directory)
+2. Next 3 characters represent the permissions for the owner
+3. Following 3 characters represent the permissions for the group
+4. Last 3 characters represent the permissions for others
+
+chmod (aka change mode) - used to change the permissions of files or directories
+Ex: $ chmod [ permissions ] [ filename ]
+    $ chmod u=rwx file.txt
+    $ chmod a=rx file.txt
+    $ chmod u=rwx,g=r,o=file.txt
+    $ chmod u+x file.txt
+    $ chmod u+rwx,g+x file.txt
+    $ chmod u+rwx,g-x file.txt
+
+Octal Permissions
+You can represent permissions with octal numbers (0-7).
+Ex: chmod u=rwx,g=rx,o=r myfile
+    OR
+    chmod 754 myfile
+
+chown - changes the owner & group
+   $ chown [ -v | -R ] [ new-owner:new-group ] [ filename ]
+
+Common Pipeline Utilities: id
+id - prints user & group information for the specified USERNAME, or, when USERNAME omitted, for the current user
+Ex: $ id [ username ]
+
+Commond Pipeline Utilities: who, whoami, w
+who - prints information about all users who are currently logged in
+whoami - to display system's username
+w - to display list of users & their activities
+users - prints the names of all users currently logged in to the host
+
+Superuser do
+sudo [ command ] - allows a user w/ proper permissions to execute a command as another user, such as the administrator/root user
+
+Group Administration
+groupadd [ group ] - creates a new group
+groupdel [ group ] - used by a superuser or root to remove a group
+gpasswd [ options ] [ group ] - administer a group by changing its members, administrators, & passwords
+
+Changing Your Group
+newgrp - allows a user to login to a new group (change the current group ID)
+
+Changing File Groups
+chgrp [ group ] [ file ] - changes group ownership of a file or files
+
+User Account Administration
+useradd [ username ] - creates a new user account using the options specified on the command line plus the default values specified in the /etc/default/useradd file
+userdel [ username ] delete user account
+passwd [ username ] - change password of a user
+
+Substitute User
+su [ username ] - changes the current user ID to that of the specified user (requires the password of the user specified)
+
+Substitute Group
+sg [ group ] - executes commands as a different group ID
+
+Index Nodes
+An inode (index node) is a data structure on a traditional Unix-style file system. It stores basic information about a file, directory, or other file system object.
+
+File System
+Each inode stores the disk block location(s) of the object's data. This is the connection between the file within the filesystem & the actual data that it represents. These numbers index into a table of inodes in a known location on the device. From there, the kernel's file system driver can access the inode contents, including the location of the file - thus allowing access to the file's data wherever it is stored.
+You can also use the stat command to see the inode number & attributes of a file. Directories have inodes just like files. There are 2 types of links: hard links & soft (symbolic) links.
+
+Hard Link
+ln ./file1 ./file2
+
+Soft Link
+ln -s ./file1 ./file2
+
+
